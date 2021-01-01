@@ -58,7 +58,7 @@ if (_stationQuantity >= _refuelNeededQuantity) then {
 			[["%1 litres de carburant ajoutés à la citerne. %2 litres restant dans la station.", _refuelDeliveredQuantity, _stationQuantity],2.5] call ace_common_fnc_displayTextStructured;
 		},
 		{
-			["Ravitaillement de la citerne interrompu.Aucun carburant n'a été transféré.",2.5] call ace_common_fnc_displayTextStructured;
+			["Ravitaillement de la citerne interrompu. Aucun carburant n'a été transféré.",2.5] call ace_common_fnc_displayTextStructured;
 		},
 		"Ravitaillement en cours",		
 		{
