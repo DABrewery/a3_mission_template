@@ -12,4 +12,6 @@ tanin69's default mission template for Arma 3 video game
 * init.sqf : pattern for init.sqf file, containing base code used with this template (Lucy initialisation, for example)
 * initServer.sqf : pattern for initServer.sqf file, containing base code used with this template (executed only on the server), like global variables for groups definition, PLUTO init, etc.
 
+For further information, please read the wiki associated with the github repository [https://github.com/DABrewery/a3_mission_template/wiki](https://github.com/DABrewery/a3_mission_template/wiki)
+
 
