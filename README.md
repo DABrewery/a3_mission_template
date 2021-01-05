@@ -3,8 +3,8 @@ tanin69's default mission template for Arma 3 video game
 
 ## Template structure
 
-* \functions : various useful functions
-* \spawn_IA : example scripts for spawn_zone functions
+* /functions : various useful functions
+* /spawn_IA : example scripts for spawn_zone functions
 * CfgFunctions.hpp : config file for functions
 * README.md : front readme file
 * briefing.sqf : pattern for briefing.sqf file
