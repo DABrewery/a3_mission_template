@@ -16,30 +16,30 @@
  */
 
 params[
-	"_vehicle", //Véhicule dont la citerne est à ravitailler
-	"_station", //Station de refuel
-	"_area",    //Zone dans laquelle doit se trouver le véhicule. Si le véhicule quitte la zone en cours de ravitaillement; celui-ci est interrompu
+	"_vehicle", 
+	"_station",
+	"_area",
 	["_tankCapacity", 10000]
 ];
 
-private _tankLoad = 0;                 //Quantité actuelle dans la citerne du véhicule
-private _stationQuantity = 0;          //Quantité dans la station
-private _refuelNeededQuantity = 0;     //Quantité pour remplir la citerne au max
-private _refuelDeliveredQuantity = 0;  //Quantité délivrée par la station
+private _tankLoad = 0;                 //Quantity of fuel in the vehicle tank
+private _stationQuantity = 0;          //Quantity of fuel in the fuel station
+private _refuelNeededQuantity = 0;     //Quantity of fuel to fill the vehicle tankto its maximum
+private _refuelDeliveredQuantity = 0;  //Quantity of fuel delivered by the station
 
-//Vérifie la quantité de carburant dans la citerne du véhicule
+//Verify quantity of fuel in the vehicle tank
 _tankLoad = [_vehicle] call ace_refuel_fnc_getFuel;
 
-//Calcule la quantité requise pour faire le plein (à enlever de la station)
+//Calculate the quantity required to refuel (to be removed from the station)
 _refuelNeededQuantity = _tankCapacity - _tankLoad;
 
-//Vérifie la quantité de fuel de la station
+//Verify the quantity of fuel in the station
 _stationQuantity = [_station] call ace_refuel_fnc_getFuel;
 
-//Si la cuve est vide, on sort en renvoyant les bonnes valeurs
+//If the station is empty, exit wit no refuel for the vehicle
 if (_stationQuantity == 0) exitWith {hint "La station ne contient plus de fuel, aucun ravitaillement n'a été effectué.";};
 
-//S'il y assez de fuel, on délivre la quantité requise pour le plein
+//If there is enough fuel in the station to refuel the vehicle to its maximum
 if (_stationQuantity >= _refuelNeededQuantity) then {
 	
 	_refuelDeliveredQuantity = _refuelNeededQuantity;
@@ -49,9 +49,9 @@ if (_stationQuantity >= _refuelNeededQuantity) then {
 		{
 			params ["_args"];
 			_args params ["_vehicle", "_station", "_area", "_tankCapacity", "_stationQuantity","_refuelNeededQuantity"];
-			//On met à jour la quantité de fuel de la station
+			//Update quantity of fuel in the station
 			_stationQuantity = _stationQuantity - _refuelNeededQuantity;
-			//On met à jour la quantité de fuel de la citerne
+			//Update quantity of fuel in the vehicle tank
 			[_vehicle, _tankCapacity] call ace_refuel_fnc_setFuel;
 			_refuelDeliveredQuantity = _refuelNeededQuantity;
 			[_station, _stationQuantity] call ace_refuel_fnc_setFuel;
@@ -69,7 +69,7 @@ if (_stationQuantity >= _refuelNeededQuantity) then {
 		
 	] call ace_common_fnc_progressBar
 	
-} else { //Sinon on délivre le reste
+} else { //Else, refuel the vehicle with the remaining quantity of fuel in the station
 
 	_refuelDeliveredQuantity = _stationQuantity;
 

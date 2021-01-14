@@ -1,3 +1,10 @@
+/*
+
+TODO : raise event on challenge success
+
+*/
+
+
 params [
 	"_linkedObject",
 	["_maxDuration",300],
